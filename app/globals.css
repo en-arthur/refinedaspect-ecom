@@ -1,26 +1,141 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300&family=DM+Mono:wght@300&display=swap');
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+  --font-heading: var(--font-bebas);
+  --color-void: #0A0A0A;
+  --color-bone: #F5F3EF;
+  --color-dune: #C8A96E;
+  --color-carbon: #1E1E1E;
+  --color-gray: #6B6B6B;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius: 0px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #0A0A0A;
+  --foreground: #F5F3EF;
+  --card: #1E1E1E;
+  --card-foreground: #F5F3EF;
+  --popover: #1E1E1E;
+  --popover-foreground: #F5F3EF;
+  --primary: #F5F3EF;
+  --primary-foreground: #0A0A0A;
+  --secondary: #1E1E1E;
+  --secondary-foreground: #F5F3EF;
+  --muted: #1E1E1E;
+  --muted-foreground: #6B6B6B;
+  --accent: #C8A96E;
+  --accent-foreground: #0A0A0A;
+  --destructive: #ef4444;
+  --border: rgba(245, 243, 239, 0.1);
+  --input: rgba(245, 243, 239, 0.1);
+  --ring: #C8A96E;
+  --radius: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    border-radius: 0 !important;
+  }
+  body {
+    background-color: #0A0A0A;
+    color: #F5F3EF;
+    font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
+
+/* Page transition */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-transition {
+  animation: pageFadeIn 0.4s ease forwards;
+}
+
+/* Cart drawer */
+.cart-drawer {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dune accent line */
+.dune-line::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: #C8A96E;
+  margin-top: 12px;
+}
+
+/* Size button */
+.size-btn {
+  border: 1px solid rgba(245, 243, 239, 0.2);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.size-btn:hover, .size-btn.active {
+  border-color: #C8A96E;
+  color: #C8A96E;
+}
+.size-btn.sold-out {
+  opacity: 0.3;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E1E1E;
 }
