@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { createOrder } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function CheckoutPage() {
   const { items, subtotalGHS, subtotalUSD, clearCart } = useCart();
@@ -16,6 +18,15 @@ export default function CheckoutPage() {
     line1: "", line2: "", city: "", region: "", country: "Ghana",
   });
 
+  // Load Paystack Popup JS
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/inline.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
   function set(key, val) { setForm(f => ({ ...f, [key]: val })); }
 
   async function handleSubmit(e) {
@@ -23,7 +34,9 @@ export default function CheckoutPage() {
     if (items.length === 0) return;
     setSubmitting(true);
     setError("");
+
     try {
+      // 1. Create order (pending/unpaid)
       const order = await createOrder({
         customer_name: form.customer_name,
         customer_email: form.customer_email,
@@ -33,23 +46,58 @@ export default function CheckoutPage() {
           city: form.city, region: form.region, country: form.country,
         },
         items: items.map(i => ({
-          product_id: i.id,
-          slug: i.slug,
-          name: i.name,
-          size: i.size,
-          color: i.colors?.[0] || "",
-          quantity: i.quantity,
-          price_ghs: i.priceGHS,
-          price_usd: i.priceUSD,
+          product_id: i.id, slug: i.slug, name: i.name,
+          size: i.size, color: i.colors?.[0] || "",
+          quantity: i.quantity, price_ghs: i.priceGHS, price_usd: i.priceUSD,
         })),
         total_ghs: subtotalGHS,
         total_usd: subtotalUSD,
       });
-      clearCart();
-      router.push(`/order-confirmation/${order.id}`);
+
+      // 2. Initialize Paystack transaction
+      const initRes = await fetch(`${API}/api/paystack/initialize`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          order_id: order.id,
+          email: form.customer_email,
+          amount_ghs: subtotalGHS,
+        }),
+      });
+
+      if (!initRes.ok) throw new Error("Payment initialization failed");
+      const { access_code, reference } = await initRes.json();
+
+      // 3. Open Paystack Popup
+      const handler = window.PaystackPop.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        email: form.customer_email,
+        amount: subtotalGHS * 100,
+        currency: "GHS",
+        ref: reference,
+        access_code,
+        onClose: () => {
+          setSubmitting(false);
+          setError("Payment cancelled. Your order is saved — you can complete payment later.");
+        },
+        callback: async (response) => {
+          // 4. Verify payment
+          const verifyRes = await fetch(`${API}/api/paystack/verify/${response.reference}`);
+          const verify = await verifyRes.json();
+
+          if (verify.status === "success") {
+            clearCart();
+            router.push(`/order-confirmation/${order.id}`);
+          } else {
+            setSubmitting(false);
+            setError("Payment could not be verified. Please contact us.");
+          }
+        },
+      });
+
+      handler.openIframe();
     } catch (err) {
       setError(err.message);
-    } finally {
       setSubmitting(false);
     }
   }
@@ -81,7 +129,6 @@ export default function CheckoutPage() {
         <h1 className="font-[family-name:var(--font-bebas)] text-5xl tracking-widest mb-12">CHECKOUT</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-[0.3em] text-[#C8A96E] uppercase">Contact</p>
@@ -98,13 +145,16 @@ export default function CheckoutPage() {
             </div>
             {field("Country", "country")}
 
-            {error && <p className="text-xs text-red-400 font-[family-name:var(--font-dm-mono)]">{error}</p>}
+            {error && <p className="text-xs font-[family-name:var(--font-dm-mono)]" style={{ color: "#e05252" }}>{error}</p>}
 
             <button type="submit" disabled={submitting}
               className="mt-4 w-full py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase"
-              style={{ background: "#F5F3EF", color: "#0A0A0A" }}>
-              {submitting ? "Placing Order..." : "Place Order"}
+              style={{ background: "#F5F3EF", color: "#0A0A0A", opacity: submitting ? 0.7 : 1 }}>
+              {submitting ? "Processing..." : `Pay GHS ${subtotalGHS}`}
             </button>
+            <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider text-center">
+              Secured by Paystack
+            </p>
           </form>
 
           {/* Order Summary */}
@@ -127,10 +177,9 @@ export default function CheckoutPage() {
               <span className="text-[#C8A96E]">GHS {subtotalGHS} <span className="text-[#6B6B6B] text-xs">/ ${subtotalUSD}</span></span>
             </div>
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider mt-2">
-              {subtotalGHS >= 600 ? "✓ Free shipping applied" : `Free shipping on orders over GHS 600`}
+              {subtotalGHS >= 600 ? "✓ Free shipping applied" : "Free shipping on orders over GHS 600"}
             </p>
           </div>
-
         </div>
       </div>
     </div>
