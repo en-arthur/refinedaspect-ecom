@@ -14,7 +14,7 @@ export default function Footer() {
               href="/"
               className="font-[family-name:var(--font-bebas)] text-3xl tracking-widest text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300"
             >
-              STILLFORM
+              REFINED ASPECT
             </Link>
 
             {/* Nav */}
@@ -39,10 +39,10 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex gap-5 items-center">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/refined_aspect_ecom"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
+                aria-label="Instagram @refined_aspect_ecom"
                 className="text-[#6B6B6B] hover:text-[#C8A96E] transition-all duration-300 hover:scale-110"
               >
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -52,10 +52,10 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://tiktok.com"
+                href="https://tiktok.com/@refinedaspect"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="TikTok"
+                aria-label="TikTok @refinedaspect"
                 className="text-[#6B6B6B] hover:text-[#C8A96E] transition-all duration-300 hover:scale-110"
               >
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
@@ -70,10 +70,10 @@ export default function Footer() {
         <AnimateIn variant="fade-in" delay={150} duration={700}>
           <div className="mt-10 pt-6 border-t border-[rgba(245,243,239,0.05)] flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
             <p className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest uppercase">
-              © 2025 STILLFORM. All rights reserved.
+              © 2026 Refined Aspect. All rights reserved.
             </p>
             <p className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest uppercase">
-              Calm. Composed. Considered.
+              Refined. Considered. Intentional.
             </p>
           </div>
         </AnimateIn>

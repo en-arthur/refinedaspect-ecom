@@ -28,8 +28,8 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  title: "STILLFORM — Calm. Composed. Considered.",
-  description: "SF-01: Origin. Premium minimal menswear.",
+  title: "REFINED ASPECT — Refined. Considered. Intentional.",
+  description: "RA-01: Origin. Premium minimal menswear.",
 };
 
 export default function RootLayout({ children }) {

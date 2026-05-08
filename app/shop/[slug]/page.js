@@ -1,14 +1,16 @@
-import { getProductBySlug, products } from "@/lib/products";
+import { fetchProductBySlug, fetchProducts } from "@/lib/api";
+import { normalizeProduct } from "@/lib/normalize";
 import { notFound } from "next/navigation";
 import ProductDetail from "@/components/ProductDetail";
 
 export async function generateStaticParams() {
+  const products = await fetchProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await fetchProductBySlug(slug);
   if (!product) return {};
   return {
     title: `${product.name} — STILLFORM`,
@@ -18,10 +20,13 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const [product, allProducts] = await Promise.all([
+    fetchProductBySlug(slug),
+    fetchProducts(),
+  ]);
   if (!product) notFound();
 
-  const related = products.filter((p) => p.id !== product.id);
+  const related = allProducts.filter((p) => p.slug !== slug).map(normalizeProduct);
 
-  return <ProductDetail product={product} related={related} />;
+  return <ProductDetail product={normalizeProduct(product)} related={related} />;
 }

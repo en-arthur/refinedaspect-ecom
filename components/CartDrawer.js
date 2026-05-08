@@ -15,8 +15,8 @@ export default function CartDrawer() {
     subtotalUSD,
   } = useCart();
 
-  const freeShipping = subtotalGHS >= 500;
-  const progressPct = Math.min((subtotalGHS / 500) * 100, 100);
+  const freeShipping = subtotalGHS >= 600;
+  const progressPct = Math.min((subtotalGHS / 600) * 100, 100);
 
   return (
     <>
@@ -73,7 +73,7 @@ export default function CartDrawer() {
               <span className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider uppercase">
                 {freeShipping
                   ? "✓ Free shipping unlocked"
-                  : `GHS ${500 - subtotalGHS} away from free shipping`}
+                  : `GHS ${600 - subtotalGHS} away from free shipping`}
               </span>
               {freeShipping && (
                 <span className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#C8A96E] tracking-wider">
@@ -146,14 +146,18 @@ export default function CartDrawer() {
               </span>
             </div>
             <p className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider mb-5">
-              {freeShipping ? "✓ Free shipping applied" : "Free shipping on orders over GHS 500"}
+              {freeShipping ? "✓ Free shipping applied" : "Free shipping on orders over GHS 600"}
             </p>
-            <button className="btn-sweep w-full bg-[#F5F3EF] text-[#0A0A0A] py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase transition-colors group">
+            <Link
+              href="/checkout"
+              onClick={() => setIsOpen(false)}
+              className="btn-sweep w-full bg-[#F5F3EF] text-[#0A0A0A] py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase transition-colors group flex items-center justify-center gap-2"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Proceed to Checkout
                 <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-300" />
               </span>
-            </button>
+            </Link>
           </div>
         )}
       </div>

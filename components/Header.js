@@ -29,7 +29,7 @@ export default function Header() {
   const navLinks = [
     { href: "/shop", label: "Shop" },
     { href: "/about", label: "About" },
-    { href: "/shop", label: "SF-01: Origin", accent: true },
+    { href: "/shop", label: "RA-01: Origin", accent: true },
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function Header() {
             className="font-[family-name:var(--font-bebas)] tracking-[0.2em] text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300"
             style={{ fontSize: scrolled ? "1.25rem" : "1.4rem" }}
           >
-            STILLFORM
+            REFINED ASPECT
           </Link>
 
           {/* Desktop Nav */}
@@ -149,7 +149,7 @@ export default function Header() {
             { href: "/", label: "Home" },
             { href: "/shop", label: "Shop" },
             { href: "/about", label: "About" },
-            { href: "/shop", label: "SF-01: Origin" },
+            { href: "/shop", label: "RA-01: Origin" },
           ].map(({ href, label }, i) => (
             <Link
               key={label}
@@ -169,7 +169,7 @@ export default function Header() {
         <div className="pb-10 flex flex-col items-center gap-3">
           <div className="w-8 h-[1px] bg-[#C8A96E] opacity-40" />
           <span className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-[0.4em] uppercase">
-            Calm. Composed. Considered.
+            Refined. Considered. Intentional.
           </span>
         </div>
       </div>

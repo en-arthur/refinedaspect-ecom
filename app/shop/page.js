@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { products } from "@/lib/products";
+import { useState, useEffect } from "react";
+import { fetchProducts } from "@/lib/api";
+import { normalizeProduct } from "@/lib/normalize";
 import ProductCard from "@/components/ProductCard";
 import AnimateIn from "@/components/AnimateIn";
 
@@ -9,6 +10,13 @@ const FILTERS = ["All", "Tee", "Coming Soon"];
 
 export default function ShopPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts()
+      .then(ps => setProducts(ps.map(normalizeProduct)))
+      .catch(() => setProducts([]));
+  }, []);
 
   const filtered =
     activeFilter === "All"
@@ -29,7 +37,7 @@ export default function ShopPage() {
             </span>
             <div className="flex items-end justify-between">
               <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl tracking-widest text-[#F5F3EF]">
-                SF-01: ORIGIN
+                RA-01: ORIGIN
               </h1>
               <span className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider mb-2 tabular-nums">
                 {filtered.length} {filtered.length === 1 ? "ITEM" : "ITEMS"}
@@ -67,9 +75,6 @@ export default function ShopPage() {
               <p className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider max-w-xs">
                 The next drop is being considered. Stay close.
               </p>
-              <button className="btn-sweep mt-4 border border-[rgba(245,243,239,0.2)] px-8 py-3 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] hover:text-[#0A0A0A] transition-colors">
-                <span className="relative z-10">Notify Me</span>
-              </button>
             </div>
           </AnimateIn>
         ) : (

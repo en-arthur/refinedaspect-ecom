@@ -249,13 +249,16 @@ export default function ProductDetail({ product, related }) {
 
               {/* Shipping note */}
               <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider text-center mb-8">
-                Free shipping on orders over GHS 500
+                Free shipping on orders over GHS 600
               </p>
 
               {/* Description */}
               <div className="border-t border-[rgba(245,243,239,0.08)] pt-6 mb-4">
                 <p className="text-sm font-[family-name:var(--font-dm-sans)] text-[#6B6B6B] leading-7 font-light">
                   {product.description}
+                </p>
+                <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest mt-3 uppercase">
+                  100% Cotton · 200 GSM
                 </p>
               </div>
 
@@ -357,8 +360,8 @@ export default function ProductDetail({ product, related }) {
           <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#C8A96E] tracking-widest uppercase mb-4">
             West African Sizing Notes
           </p>
-          <p className="text-xs font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider leading-6 mb-6">
-            STILLFORM pieces are cut with a relaxed, oversized silhouette. If you prefer a closer fit, size down. All measurements are in centimetres.
+          <p className="font-[family-name:var(--font-dm-mono)] text-xs leading-7 text-[#6B6B6B] tracking-wider mb-6">
+            REFINED ASPECT pieces are cut with a relaxed, oversized silhouette. If you prefer a closer fit, size down. All measurements are in centimetres.
           </p>
 
           <table className="w-full text-xs font-[family-name:var(--font-dm-mono)] tracking-wider">
@@ -371,11 +374,10 @@ export default function ProductDetail({ product, related }) {
             </thead>
             <tbody>
               {[
-                { size: "S",  chest: "96–101",  length: "68", shoulder: "44" },
                 { size: "M",  chest: "102–107", length: "70", shoulder: "46" },
                 { size: "L",  chest: "108–113", length: "72", shoulder: "48" },
                 { size: "XL", chest: "114–119", length: "74", shoulder: "50" },
-              ].map((row, i) => (
+              ].map((row) => (
                 <tr
                   key={row.size}
                   className="border-b border-[rgba(245,243,239,0.04)] hover:bg-[rgba(245,243,239,0.02)] transition-colors duration-200"
@@ -391,6 +393,9 @@ export default function ProductDetail({ product, related }) {
 
           <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider mt-4">
             Model is 6'1" / 185cm and wears size M.
+          </p>
+          <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#C8A96E] tracking-wider mt-2">
+            Sized for male fit — when in doubt size up.
           </p>
         </div>
       </div>
