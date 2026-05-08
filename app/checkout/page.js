@@ -76,22 +76,27 @@ export default function CheckoutPage() {
         currency: "GHS",
         ref: reference,
         access_code,
-        onClose: () => {
+        onClose: function() {
           setSubmitting(false);
           setError("Payment cancelled. Your order is saved — you can complete payment later.");
         },
-        callback: async (response) => {
-          // 4. Verify payment
-          const verifyRes = await fetch(`${API}/api/paystack/verify/${response.reference}`);
-          const verify = await verifyRes.json();
-
-          if (verify.status === "success") {
-            clearCart();
-            router.push(`/order-confirmation/${order.id}`);
-          } else {
-            setSubmitting(false);
-            setError("Payment could not be verified. Please contact us.");
-          }
+        callback: function(response) {
+          // Verify payment after popup closes
+          fetch(`${API}/api/paystack/verify/${response.reference}`)
+            .then(r => r.json())
+            .then(verify => {
+              if (verify.status === "success") {
+                clearCart();
+                router.push(`/order-confirmation/${order.id}`);
+              } else {
+                setSubmitting(false);
+                setError("Payment could not be verified. Please contact us.");
+              }
+            })
+            .catch(() => {
+              setSubmitting(false);
+              setError("Verification failed. Please contact us.");
+            });
         },
       });
 
