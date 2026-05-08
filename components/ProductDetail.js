@@ -49,6 +49,13 @@ export default function ProductDetail({ product, related }) {
             <div className="flex flex-col gap-4">
               {/* Main image */}
               <div className="product-img-wrap aspect-[3/4] bg-[#1E1E1E] relative overflow-hidden">
+                {product.images?.[activeImage] ? (
+                  <img
+                    src={product.images[activeImage]}
+                    alt={`${product.name} ${activeImage === 0 ? "front" : "back"}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
                 <div
                   className="product-img-inner absolute inset-0 flex flex-col items-center justify-center transition-all duration-500"
                   style={{ opacity: 1 }}
@@ -60,6 +67,7 @@ export default function ProductDetail({ product, related }) {
                     {activeImage === 0 ? "FRONT VIEW" : "BACK VIEW"}
                   </span>
                 </div>
+                )}
 
                 {/* Collection tag */}
                 <div className="absolute top-4 left-4 z-10">
@@ -90,14 +98,16 @@ export default function ProductDetail({ product, related }) {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className="flex-1 aspect-[3/4] bg-[#1E1E1E] flex items-center justify-center border transition-all duration-300 hover:border-[rgba(245,243,239,0.3)]"
-                    style={{
-                      borderColor: activeImage === i ? "#C8A96E" : "transparent",
-                    }}
+                    className="flex-1 aspect-[3/4] bg-[#1E1E1E] flex items-center justify-center border transition-all duration-300 hover:border-[rgba(245,243,239,0.3)] overflow-hidden"
+                    style={{ borderColor: activeImage === i ? "#C8A96E" : "transparent" }}
                   >
-                    <span className="text-[8px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest opacity-40">
-                      {label}
-                    </span>
+                    {product.images?.[i] ? (
+                      <img src={product.images[i]} alt={label} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-[8px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest opacity-40">
+                        {label}
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>

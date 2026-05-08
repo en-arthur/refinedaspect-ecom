@@ -28,17 +28,27 @@ export default function ProductCard({ product }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* Placeholder — scales on hover via CSS */}
+        {/* Image or placeholder */}
         <div className="product-img-inner absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-[family-name:var(--font-bebas)] text-4xl tracking-widest text-[#6B6B6B] opacity-[0.12] transition-opacity duration-500 group-hover:opacity-[0.18]">
-            {product.name}
-          </span>
-          <span
-            className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest mt-2 transition-all duration-500"
-            style={{ opacity: hovered ? 0.3 : 0.12 }}
-          >
-            {hovered ? "BACK VIEW" : "FRONT VIEW"}
-          </span>
+          {product.images?.[0] ? (
+            <img
+              src={hovered && product.images[1] ? product.images[1] : product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover transition-opacity duration-500"
+            />
+          ) : (
+            <>
+              <span className="font-[family-name:var(--font-bebas)] text-4xl tracking-widest text-[#6B6B6B] opacity-[0.12] transition-opacity duration-500 group-hover:opacity-[0.18]">
+                {product.name}
+              </span>
+              <span
+                className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest mt-2 transition-all duration-500"
+                style={{ opacity: hovered ? 0.3 : 0.12 }}
+              >
+                {hovered ? "BACK VIEW" : "FRONT VIEW"}
+              </span>
+            </>
+          )}
         </div>
 
         {/* Color dot */}
