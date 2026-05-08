@@ -174,12 +174,18 @@ function CartItem({ item, index, onRemove, onUpdate }) {
     >
       {/* Thumbnail */}
       <div
-        className="w-[72px] h-[88px] flex-shrink-0 flex items-center justify-center overflow-hidden group"
+        className="w-[72px] h-[88px] flex-shrink-0 overflow-hidden"
         style={{ backgroundColor: "var(--surface)" }}
       >
-        <span className="text-[7px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest text-center px-1 opacity-30 group-hover:opacity-60 transition-opacity duration-300">
-          {item.name}
-        </span>
+        {item.images?.[0] ? (
+          <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-[7px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest text-center px-1 opacity-30">
+              {item.name}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex-1 flex flex-col justify-between min-w-0">
