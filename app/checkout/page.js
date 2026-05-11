@@ -86,6 +86,7 @@ export default function CheckoutPage() {
             .then(r => r.json())
             .then(verify => {
               if (verify.status === "success") {
+                localStorage.setItem("ra_phone", form.customer_phone);
                 clearCart();
                 router.push(`/order-confirmation/${order.id}`);
               } else {

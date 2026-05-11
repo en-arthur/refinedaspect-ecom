@@ -342,3 +342,13 @@
   background: #C8A96E;
   color: #0A0A0A;
 }
+
+/* ─── ORDER TRACKING ICON ANIMATIONS ─────────────────────── */
+@keyframes trackPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.15); }
+}
+@keyframes trackDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}

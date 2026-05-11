@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, Package } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState, useEffect } from "react";
 import { useScrollY } from "@/hooks/useScrollY";
@@ -11,9 +11,19 @@ import ThemeToggle from "@/components/ThemeToggle";
 export default function Header() {
   const { totalItems, setIsOpen } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [unviewedOrders, setUnviewedOrders] = useState(0);
   const scrollY = useScrollY();
   const pathname = usePathname();
   const scrolled = scrollY > 60;
+
+  useEffect(() => {
+    const phone = localStorage.getItem("ra_phone");
+    if (!phone) return;
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders/unviewed/${encodeURIComponent(phone)}`)
+      .then(r => r.json())
+      .then(d => setUnviewedOrders(d.count || 0))
+      .catch(() => {});
+  }, [pathname]);
 
   // Close mobile nav on route change
   useEffect(() => {
@@ -78,6 +88,18 @@ export default function Header() {
           {/* Right side */}
           <div className="flex items-center gap-3">
             <ThemeToggle />
+
+            {/* Order tracking icon */}
+            <Link href="/track-order" aria-label="Track order"
+              className="relative text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300 group">
+              <Package
+                size={20} strokeWidth={1.5}
+                className={unviewedOrders > 0 ? "animate-[trackPulse_2s_ease-in-out_infinite]" : ""}
+              />
+              {unviewedOrders > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-2 h-2 rounded-full bg-[#C8A96E] animate-[trackDot_2s_ease-in-out_infinite]" />
+              )}
+            </Link>
             <button
               onClick={() => setIsOpen(true)}
               className="relative text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300 group"

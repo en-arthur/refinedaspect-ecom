@@ -8,6 +8,8 @@ async function getOrder(id) {
   try {
     const res = await fetch(`${API}/api/orders/confirmation/${id}`, { cache: "no-store" });
     if (!res.ok) return null;
+    // Mark as viewed server-side
+    fetch(`${API}/api/orders/viewed/${id}`, { method: "PATCH" }).catch(() => {});
     return res.json();
   } catch { return null; }
 }
