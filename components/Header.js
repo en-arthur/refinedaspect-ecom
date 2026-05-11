@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <>
       <header
-        className="sticky top-0 z-50 transition-all duration-500"
+        className="sticky top-0 z-50 transition-colors duration-500"
         style={{
           backgroundColor: scrolled
             ? "color-mix(in srgb, var(--background) 98%, transparent)"
@@ -47,15 +47,11 @@ export default function Header() {
           boxShadow: scrolled ? "0 1px 0 rgba(200,169,110,0.08)" : "none",
         }}
       >
-        <div
-          className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500"
-          style={{ height: scrolled ? "52px" : "60px" }}
-        >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-[60px]">
           {/* Logo */}
           <Link
             href="/"
-            className="font-[family-name:var(--font-bebas)] tracking-[0.2em] text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300"
-            style={{ fontSize: scrolled ? "1.25rem" : "1.4rem" }}
+            className="font-[family-name:var(--font-bebas)] text-xl tracking-[0.2em] text-[#F5F3EF] hover:text-[#C8A96E] transition-colors duration-300"
           >
             REFINED ASPECT
           </Link>
