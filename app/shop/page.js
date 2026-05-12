@@ -5,17 +5,20 @@ import { fetchProducts } from "@/lib/api";
 import { normalizeProduct } from "@/lib/normalize";
 import ProductCard from "@/components/ProductCard";
 import AnimateIn from "@/components/AnimateIn";
+import SkeletonCard from "@/components/SkeletonCard";
 
 const FILTERS = ["All", "Tee", "Coming Soon"];
 
 export default function ShopPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts()
       .then(ps => setProducts(ps.map(normalizeProduct)))
-      .catch(() => setProducts([]));
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false));
   }, []);
 
   const filtered =
@@ -66,7 +69,11 @@ export default function ShopPage() {
         </AnimateIn>
 
         {/* Grid */}
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+            {Array(6).fill(null).map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : filtered.length === 0 ? (
           <AnimateIn variant="fade-up" duration={600}>
             <div className="flex flex-col items-center justify-center py-32 gap-4 text-center">
               <h2 className="font-[family-name:var(--font-bebas)] text-4xl tracking-widest text-[#F5F3EF]">
