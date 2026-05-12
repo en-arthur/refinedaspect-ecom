@@ -50,7 +50,9 @@ export default function CheckoutPage() {
         customer_phone: form.customer_phone || undefined,
         shipping_address: {
           line1: form.line1, line2: form.line2 || undefined,
-          city: form.city, region: form.region, country: form.country,
+          city: form.city === "Other" ? form.cityCustom : form.city,
+          region: form.region === "Other" ? form.regionCustom : form.region,
+          country: form.country,
         },
         items: items.map(i => ({
           product_id: i.id, slug: i.slug, name: i.name,
@@ -157,23 +159,38 @@ export default function CheckoutPage() {
               {/* Region dropdown */}
               <div>
                 <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">Region</label>
-                <select value={form.region} onChange={e => set("region", e.target.value)} required
+                <select value={form.region === form.regionCustom && form.regionCustom ? "Other" : form.region}
+                  onChange={e => { set("region", e.target.value); if (e.target.value !== "Other") set("regionCustom", ""); }}
+                  required
                   className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none"
-                  style={{ border: "1px solid var(--border-mid)", color: form.region ? "var(--foreground)" : "#6B6B6B", background: "transparent" }}>
+                  style={{ border: "1px solid var(--border-mid)", color: "var(--foreground)", background: "transparent" }}>
                   <option value="" disabled>Select region</option>
                   {REGIONS.map(r => <option key={r} value={r} style={{ background: "#0A0A0A" }}>{r}</option>)}
+                  <option value="Other" style={{ background: "#0A0A0A" }}>Other</option>
                 </select>
+                {form.region === "Other" && (
+                  <input type="text" placeholder="Type your region" value={form.regionCustom || ""} onChange={e => set("regionCustom", e.target.value)} required
+                    className="w-full px-4 py-2 mt-2 text-sm font-[family-name:var(--font-dm-mono)] outline-none bg-transparent"
+                    style={{ border: "1px solid var(--border-mid)", color: "var(--foreground)" }} />
+                )}
               </div>
 
               {/* City dropdown */}
               <div>
                 <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">City / Town</label>
-                <select value={form.city} onChange={e => set("city", e.target.value)} required disabled={!form.region}
+                <select value={form.city} onChange={e => set("city", e.target.value)} required
+                  disabled={!form.region}
                   className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none"
                   style={{ border: "1px solid var(--border-mid)", color: form.city ? "var(--foreground)" : "#6B6B6B", background: "transparent", opacity: form.region ? 1 : 0.5 }}>
                   <option value="" disabled>Select city</option>
                   {(GHANA_REGIONS[form.region] || []).map(c => <option key={c} value={c} style={{ background: "#0A0A0A" }}>{c}</option>)}
+                  <option value="Other" style={{ background: "#0A0A0A" }}>Other</option>
                 </select>
+                {form.city === "Other" && (
+                  <input type="text" placeholder="Type your city/town" value={form.cityCustom || ""} onChange={e => set("cityCustom", e.target.value)} required
+                    className="w-full px-4 py-2 mt-2 text-sm font-[family-name:var(--font-dm-mono)] outline-none bg-transparent"
+                    style={{ border: "1px solid var(--border-mid)", color: "var(--foreground)" }} />
+                )}
               </div>
             </div>
             <div>
