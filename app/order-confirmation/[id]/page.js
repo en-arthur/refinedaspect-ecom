@@ -81,15 +81,15 @@ export default async function OrderConfirmationPage({ params }) {
 
         {/* CTA */}
         <div className="text-center flex flex-col items-center gap-4">
-          <Link href="/shop"
+          <Link href={`/track-order/${id}`}
             className="btn-sweep inline-flex items-center gap-3 px-10 py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-[0.2em] uppercase group"
-            style={{ background: "var(--foreground)", color: "var(--background)" }}>
-            <span className="relative z-10">Continue Shopping</span>
+            style={{ background: "#C8A96E", color: "#0A0A0A" }}>
+            <span className="relative z-10">Track Your Order</span>
             <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
-          <Link href={`/track-order/${id}`}
-            className="text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] hover:text-[#C8A96E] transition-colors">
-            Track this order →
+          <Link href="/shop"
+            className="text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] hover:text-[#F5F3EF] transition-colors">
+            Continue Shopping →
           </Link>
         </div>
 
