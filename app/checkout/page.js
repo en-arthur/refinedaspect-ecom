@@ -5,6 +5,7 @@ import { useCart } from "@/context/CartContext";
 import { createOrder } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { GHANA_REGIONS, REGIONS } from "@/lib/ghana-locations";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -27,7 +28,13 @@ export default function CheckoutPage() {
     return () => document.body.removeChild(script);
   }, []);
 
-  function set(key, val) { setForm(f => ({ ...f, [key]: val })); }
+  function set(key, val) {
+    setForm(f => ({
+      ...f,
+      [key]: val,
+      ...(key === "region" ? { city: "" } : {}),
+    }));
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -145,11 +152,37 @@ export default function CheckoutPage() {
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-[0.3em] text-[#C8A96E] uppercase mt-4">Shipping Address</p>
             {field("Address Line 1", "line1")}
             {field("Address Line 2 (optional)", "line2", "text", false)}
+
             <div className="grid grid-cols-2 gap-4">
-              {field("City", "city")}
-              {field("Region", "region")}
+              {/* Region dropdown */}
+              <div>
+                <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">Region</label>
+                <select value={form.region} onChange={e => set("region", e.target.value)} required
+                  className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none"
+                  style={{ border: "1px solid var(--border-mid)", color: form.region ? "var(--foreground)" : "#6B6B6B", background: "transparent" }}>
+                  <option value="" disabled>Select region</option>
+                  {REGIONS.map(r => <option key={r} value={r} style={{ background: "#0A0A0A" }}>{r}</option>)}
+                </select>
+              </div>
+
+              {/* City dropdown */}
+              <div>
+                <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">City / Town</label>
+                <select value={form.city} onChange={e => set("city", e.target.value)} required disabled={!form.region}
+                  className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none"
+                  style={{ border: "1px solid var(--border-mid)", color: form.city ? "var(--foreground)" : "#6B6B6B", background: "transparent", opacity: form.region ? 1 : 0.5 }}>
+                  <option value="" disabled>Select city</option>
+                  {(GHANA_REGIONS[form.region] || []).map(c => <option key={c} value={c} style={{ background: "#0A0A0A" }}>{c}</option>)}
+                </select>
+              </div>
             </div>
-            {field("Country", "country")}
+            <div>
+              <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">Country</label>
+              <div className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)]"
+                style={{ border: "1px solid var(--border-mid)", color: "var(--text-muted)" }}>
+                Ghana
+              </div>
+            </div>
 
             {error && <p className="text-xs font-[family-name:var(--font-dm-mono)]" style={{ color: "#e05252" }}>{error}</p>}
 
