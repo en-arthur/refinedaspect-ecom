@@ -6,7 +6,7 @@ import { useCart } from "@/context/CartContext";
 import { useState, useEffect } from "react";
 import { useScrollY } from "@/hooks/useScrollY";
 import { usePathname } from "next/navigation";
-import ThemeToggle from "@/components/ThemeToggle";
+// import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const { totalItems, setIsOpen } = useCart();
@@ -87,7 +87,7 @@ export default function Header() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
 
             {/* Order tracking icon */}
             <Link href="/track-order" aria-label="Track order"

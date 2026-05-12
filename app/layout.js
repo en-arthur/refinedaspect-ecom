@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -43,16 +42,14 @@ export default function RootLayout({ children }) {
         className="min-h-screen flex flex-col"
         style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
       >
-        <ThemeProvider>
         <CartProvider>
-            <Header />
-            <CartDrawer />
-            <main className="flex-1 page-transition">
-              {children}
-            </main>
-            <Footer />
-          </CartProvider>
-        </ThemeProvider>
+          <Header />
+          <CartDrawer />
+          <main className="flex-1 page-transition">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
