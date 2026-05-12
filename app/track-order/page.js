@@ -57,11 +57,11 @@ export default function TrackOrderPage() {
             type="tel" value={phone} onChange={e => setPhone(e.target.value)}
             placeholder="+233 XX XXX XXXX" required
             className="flex-1 px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none bg-transparent"
-            style={{ border: "1px solid rgba(245,243,239,0.15)", color: "var(--foreground)" }}
+            style={{ border: "1px solid var(--border-mid)", color: "var(--foreground)" }}
           />
           <button type="submit" disabled={loading}
             className="px-6 py-3 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase"
-            style={{ background: "#F5F3EF", color: "#0A0A0A", opacity: loading ? 0.7 : 1 }}>
+            style={{ background: "var(--foreground)", color: "var(--background)", opacity: loading ? 0.7 : 1 }}>
             {loading ? "..." : "Track"}
           </button>
         </form>
@@ -76,7 +76,7 @@ export default function TrackOrderPage() {
                 style={{ border: "1px solid rgba(245,243,239,0.08)", background: "var(--surface)" }}>
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <p className="font-[family-name:var(--font-dm-mono)] text-xs tracking-widest text-[#F5F3EF]">
+                    <p className="font-[family-name:var(--font-dm-mono)] text-xs tracking-widest" style={{ color: "var(--foreground)" }}>
                       #{order.id.slice(0, 8).toUpperCase()}
                     </p>
                     <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider mt-0.5">

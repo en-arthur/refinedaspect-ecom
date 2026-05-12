@@ -24,7 +24,7 @@ export default async function OrderConfirmationPage({ params }) {
           <span className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-[0.4em] text-[#C8A96E] uppercase block mb-4">
             Payment Successful
           </span>
-          <h1 className="font-[family-name:var(--font-bebas)] text-[clamp(3rem,10vw,6rem)] leading-none tracking-widest text-[#F5F3EF] mb-4">
+          <h1 className="font-[family-name:var(--font-bebas)] text-[clamp(3rem,10vw,6rem)] leading-none tracking-widest mb-4">
             THANK YOU
           </h1>
           <p className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider max-w-sm mx-auto">
@@ -36,17 +36,17 @@ export default async function OrderConfirmationPage({ params }) {
         {order && (
           <>
             {/* Order details */}
-            <div className="mb-8" style={{ border: "1px solid rgba(245,243,239,0.08)" }}>
-              <div className="px-6 py-4 flex justify-between items-center" style={{ borderBottom: "1px solid rgba(245,243,239,0.08)" }}>
+            <div className="mb-8" style={{ border: "1px solid var(--border-mid)" }}>
+              <div className="px-6 py-4 flex justify-between items-center" style={{ borderBottom: "1px solid var(--border-mid)" }}>
                 <span className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B]">Order Summary</span>
                 <span className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#C8A96E]">#{id.slice(0, 8).toUpperCase()}</span>
               </div>
 
               {order.items?.map((item, i) => (
                 <div key={i} className="px-6 py-4 flex justify-between items-center text-sm font-[family-name:var(--font-dm-mono)]"
-                  style={{ borderBottom: "1px solid rgba(245,243,239,0.06)" }}>
+                  style={{ borderBottom: "1px solid var(--border-subtle)" }}>
                   <div>
-                    <p className="tracking-wider text-[#F5F3EF]">{item.name}</p>
+                    <p className="tracking-wider">{item.name}</p>
                     <p className="text-[10px] text-[#6B6B6B] mt-0.5 tracking-wider">Size: {item.size} · Qty: {item.quantity}</p>
                   </div>
                   <p className="text-[#C8A96E] tracking-wider">GHS {(item.price_ghs * item.quantity).toFixed(2)}</p>
@@ -60,9 +60,9 @@ export default async function OrderConfirmationPage({ params }) {
             </div>
 
             {/* Shipping info */}
-            <div className="mb-8 px-6 py-5" style={{ border: "1px solid rgba(245,243,239,0.08)" }}>
+            <div className="mb-8 px-6 py-5" style={{ border: "1px solid var(--border-mid)" }}>
               <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] mb-3">Shipping To</p>
-              <p className="text-sm font-[family-name:var(--font-dm-mono)] tracking-wider text-[#F5F3EF]">{order.customer_name}</p>
+              <p className="text-sm font-[family-name:var(--font-dm-mono)] tracking-wider">{order.customer_name}</p>
               <p className="text-xs font-[family-name:var(--font-dm-mono)] tracking-wider text-[#6B6B6B] mt-1">{order.shipping_address?.line1}</p>
               <p className="text-xs font-[family-name:var(--font-dm-mono)] tracking-wider text-[#6B6B6B]">
                 {order.shipping_address?.city}, {order.shipping_address?.region}
@@ -70,7 +70,7 @@ export default async function OrderConfirmationPage({ params }) {
             </div>
 
             {/* Delivery estimate */}
-            <div className="mb-12 px-6 py-5" style={{ border: "1px solid rgba(245,243,239,0.08)", background: "rgba(200,169,110,0.04)" }}>
+            <div className="mb-12 px-6 py-5" style={{ border: "1px solid var(--border-mid)", background: "rgba(200,169,110,0.04)" }}>
               <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#C8A96E] mb-2">Delivery Estimate</p>
               <p className="text-xs font-[family-name:var(--font-dm-mono)] tracking-wider text-[#6B6B6B]">
                 Sekondi-Takoradi — Same day · Nationwide Ghana — Up to 2 days
@@ -82,7 +82,8 @@ export default async function OrderConfirmationPage({ params }) {
         {/* CTA */}
         <div className="text-center flex flex-col items-center gap-4">
           <Link href="/shop"
-            className="btn-sweep inline-flex items-center gap-3 bg-[#F5F3EF] text-[#0A0A0A] px-10 py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-[0.2em] uppercase group">
+            className="btn-sweep inline-flex items-center gap-3 px-10 py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-[0.2em] uppercase group"
+            style={{ background: "var(--foreground)", color: "var(--background)" }}>
             <span className="relative z-10">Continue Shopping</span>
             <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>

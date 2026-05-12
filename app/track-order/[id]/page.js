@@ -8,7 +8,6 @@ async function getOrder(id) {
   try {
     const res = await fetch(`${API}/api/orders/confirmation/${id}`, { cache: "no-store" });
     if (!res.ok) return null;
-    // Mark as viewed server-side
     fetch(`${API}/api/orders/viewed/${id}`, { method: "PATCH" }).catch(() => {});
     return res.json();
   } catch { return null; }
@@ -48,8 +47,7 @@ export default async function TrackOrderDetailPage({ params }) {
         {order.status !== "cancelled" && (
           <div className="mb-12">
             <div className="flex items-center justify-between relative">
-              {/* Line */}
-              <div className="absolute left-0 right-0 top-3 h-[1px]" style={{ background: "rgba(245,243,239,0.08)" }} />
+              <div className="absolute left-0 right-0 top-3 h-[1px]" style={{ background: "var(--border-mid)" }} />
               <div className="absolute left-0 top-3 h-[1px] transition-all duration-700"
                 style={{ background: "#C8A96E", width: `${currentStep === 0 ? 0 : (currentStep / (STEPS.length - 1)) * 100}%` }} />
 
@@ -58,14 +56,14 @@ export default async function TrackOrderDetailPage({ params }) {
                   <div className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500"
                     style={{
                       background: i <= currentStep ? "#C8A96E" : "var(--surface)",
-                      border: `1px solid ${i <= currentStep ? "#C8A96E" : "rgba(245,243,239,0.15)"}`,
+                      border: `1px solid ${i <= currentStep ? "#C8A96E" : "var(--border-mid)"}`,
                     }}>
                     {i < currentStep && (
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                         <path d="M2 5l2.5 2.5L8 3" stroke="#0A0A0A" strokeWidth="1.5" strokeLinecap="round" />
                       </svg>
                     )}
-                    {i === currentStep && <div className="w-2 h-2 rounded-full bg-[#0A0A0A]" />}
+                    {i === currentStep && <div className="w-2 h-2 rounded-full" style={{ background: "var(--background)" }} />}
                   </div>
                   <span className="text-[9px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase"
                     style={{ color: i <= currentStep ? "#C8A96E" : "#6B6B6B" }}>
@@ -78,12 +76,12 @@ export default async function TrackOrderDetailPage({ params }) {
         )}
 
         {/* Items */}
-        <div className="mb-6" style={{ border: "1px solid rgba(245,243,239,0.08)" }}>
+        <div className="mb-6" style={{ border: "1px solid var(--border-mid)" }}>
           <p className="px-6 py-4 text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B]"
-            style={{ borderBottom: "1px solid rgba(245,243,239,0.08)" }}>Items</p>
+            style={{ borderBottom: "1px solid var(--border-mid)" }}>Items</p>
           {order.items?.map((item, i) => (
             <div key={i} className="px-6 py-4 flex justify-between text-sm font-[family-name:var(--font-dm-mono)]"
-              style={{ borderBottom: "1px solid rgba(245,243,239,0.06)" }}>
+              style={{ borderBottom: "1px solid var(--border-subtle)" }}>
               <div>
                 <p className="tracking-wider">{item.name}</p>
                 <p className="text-[10px] text-[#6B6B6B] mt-0.5">Size: {item.size} · Qty: {item.quantity}</p>
@@ -99,12 +97,12 @@ export default async function TrackOrderDetailPage({ params }) {
 
         {/* Delivery info */}
         <div className="grid grid-cols-2 gap-4 mb-10">
-          <div className="p-5" style={{ border: "1px solid rgba(245,243,239,0.08)" }}>
+          <div className="p-5" style={{ border: "1px solid var(--border-mid)" }}>
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] mb-2">Shipping To</p>
             <p className="text-sm font-[family-name:var(--font-dm-mono)] tracking-wider">{order.customer_name}</p>
             <p className="text-xs text-[#6B6B6B] mt-1">{order.shipping_address?.city}, {order.shipping_address?.region}</p>
           </div>
-          <div className="p-5" style={{ border: "1px solid rgba(245,243,239,0.08)" }}>
+          <div className="p-5" style={{ border: "1px solid var(--border-mid)" }}>
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] mb-2">Payment</p>
             <p className="text-sm font-[family-name:var(--font-dm-mono)] tracking-wider"
               style={{ color: order.payment_status === "paid" ? "#6fcf6f" : "#C8A96E" }}>
@@ -118,7 +116,7 @@ export default async function TrackOrderDetailPage({ params }) {
 
         <div className="text-center">
           <Link href="/shop"
-            className="text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] hover:text-[#F5F3EF] transition-colors">
+            className="text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase text-[#6B6B6B] hover:text-[#C8A96E] transition-colors">
             Continue Shopping →
           </Link>
         </div>

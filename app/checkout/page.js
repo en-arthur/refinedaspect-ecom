@@ -124,7 +124,7 @@ export default function CheckoutPage() {
       <label className="block text-[10px] font-[family-name:var(--font-dm-mono)] tracking-widest text-[#6B6B6B] uppercase mb-1">{label}</label>
       <input type={type} value={form[key]} onChange={e => set(key, e.target.value)} required={required}
         className="w-full px-4 py-3 text-sm font-[family-name:var(--font-dm-mono)] outline-none bg-transparent"
-        style={{ border: "1px solid rgba(245,243,239,0.15)", color: "var(--foreground)" }}
+        style={{ border: "1px solid var(--border-mid)", color: "var(--foreground)" }}
       />
     </div>
   );
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
 
             <button type="submit" disabled={submitting}
               className="mt-4 w-full py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-widest uppercase"
-              style={{ background: "#F5F3EF", color: "#0A0A0A", opacity: submitting ? 0.7 : 1 }}>
+              style={{ background: "var(--foreground)", color: "var(--background)", opacity: submitting ? 0.7 : 1 }}>
               {submitting ? "Processing..." : `Pay GHS ${subtotalGHS}`}
             </button>
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-wider text-center">
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
           {/* Order Summary */}
           <div>
             <p className="text-[10px] font-[family-name:var(--font-dm-mono)] tracking-[0.3em] text-[#C8A96E] uppercase mb-6">Order Summary</p>
-            <div className="flex flex-col divide-y" style={{ borderColor: "rgba(245,243,239,0.08)" }}>
+            <div className="flex flex-col divide-y" style={{ borderColor: "var(--border-mid)" }}>
               {items.map(item => (
                 <div key={`${item.id}-${item.size}`} className="flex justify-between py-4 text-sm font-[family-name:var(--font-dm-mono)]">
                   <div>
@@ -178,7 +178,7 @@ export default function CheckoutPage() {
               ))}
             </div>
             <div className="flex justify-between pt-4 text-sm font-[family-name:var(--font-dm-mono)] tracking-wider"
-              style={{ borderTop: "1px solid rgba(245,243,239,0.08)" }}>
+              style={{ borderTop: "1px solid var(--border-mid)" }}>
               <span>Total</span>
               <span className="text-[#C8A96E]">GHS {subtotalGHS} <span className="text-[#6B6B6B] text-xs">/ ${subtotalUSD}</span></span>
             </div>
