@@ -27,8 +27,8 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  title: "REFINED ASPECT — Refined. Considered. Intentional.",
-  description: "RA-01: Origin. Premium minimal menswear.",
+  title: "REFINED ASPECT — Smart Home Surveillance",
+  description: "Modern wireless surveillance cameras for homes and businesses. Easy to install, always watching.",
 };
 
 export default function RootLayout({ children }) {

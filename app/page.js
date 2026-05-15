@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, Wifi, Eye, Zap } from "lucide-react";
 import { fetchProducts } from "@/lib/api";
 import { normalizeProduct } from "@/lib/normalize";
 import ProductCard from "@/components/ProductCard";
@@ -32,15 +32,15 @@ export default async function HomePage() {
 
         <div className="relative z-10 flex flex-col items-center gap-6">
           <span className="hero-tag text-[10px] font-[family-name:var(--font-dm-mono)] tracking-[0.4em] text-[#C8A96E] uppercase">
-            RA-01: ORIGIN — NOW AVAILABLE
+            SMART HOME SECURITY — NOW AVAILABLE
           </span>
 
-          <h1 className="hero-wordmark font-[family-name:var(--font-bebas)] text-[clamp(4rem,18vw,16rem)] leading-none tracking-[0.05em] text-[#F5F3EF]">
-            REFINED ASPECT.
+          <h1 className="hero-wordmark font-[family-name:var(--font-bebas)] text-[clamp(3rem,14vw,12rem)] leading-none tracking-[0.05em] text-[#F5F3EF]">
+            ALWAYS<br />WATCHING.
           </h1>
 
           <p className="hero-tagline font-[family-name:var(--font-dm-mono)] text-sm tracking-[0.3em] text-[#6B6B6B] uppercase">
-            Refined. Considered. Intentional.
+            Wireless. Intelligent. Easy to Install.
           </p>
 
           <div className="hero-cta mt-4">
@@ -48,7 +48,7 @@ export default async function HomePage() {
               href="/shop"
               className="btn-sweep inline-flex items-center gap-3 bg-[#F5F3EF] text-[#0A0A0A] px-10 py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-[0.2em] uppercase group"
             >
-              <span className="relative z-10">Shop RA-01: Origin</span>
+              <span className="relative z-10">Shop Cameras</span>
               <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
@@ -67,7 +67,7 @@ export default async function HomePage() {
             <div key={n} className="animate-marquee flex items-center shrink-0">
               {Array(10).fill(null).map((_, i) => (
                 <span key={i} className="font-[family-name:var(--font-bebas)] text-base tracking-[0.3em] text-[#6B6B6B] px-8">
-                  REFINED · CONSIDERED · INTENTIONAL · RA-01: ORIGIN ·
+                  WIRELESS · SMART HOME · 24/7 SURVEILLANCE · EASY INSTALL ·
                 </span>
               ))}
             </div>
@@ -78,7 +78,7 @@ export default async function HomePage() {
             <div key={n} className="animate-marquee-reverse flex items-center shrink-0">
               {Array(10).fill(null).map((_, i) => (
                 <span key={i} className="font-[family-name:var(--font-bebas)] text-base tracking-[0.3em] text-[rgba(200,169,110,0.25)] px-8">
-                  FROM HERE · EVERYWHERE · PREMIUM MENSWEAR · GHANA ·
+                  HOME SECURITY · BUSINESS CCTV · HD CAMERAS · GHANA ·
                 </span>
               ))}
             </div>
@@ -86,7 +86,27 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── FEATURED COLLECTION ──────────────────────────────── */}
+      {/* ── WHY CHOOSE US ────────────────────────────────────── */}
+      <section className="py-20 px-6 md:px-12 border-b border-[rgba(245,243,239,0.06)]">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { icon: <Wifi size={22} strokeWidth={1.5} />, label: "100% Wireless", desc: "No messy cables. Connect in minutes." },
+            { icon: <Eye size={22} strokeWidth={1.5} />, label: "HD Night Vision", desc: "Crystal clear footage day and night." },
+            { icon: <Shield size={22} strokeWidth={1.5} />, label: "Weatherproof", desc: "Built for indoor and outdoor use." },
+            { icon: <Zap size={22} strokeWidth={1.5} />, label: "Easy Setup", desc: "Plug in, connect, and you're live." },
+          ].map((item, i) => (
+            <AnimateIn key={item.label} variant="fade-up" delay={i * 80} duration={600}>
+              <div className="flex flex-col gap-3 group">
+                <span className="text-[#C8A96E] transition-transform duration-300 group-hover:scale-110 w-fit">{item.icon}</span>
+                <span className="font-[family-name:var(--font-bebas)] text-xl tracking-widest text-[#F5F3EF]">{item.label}</span>
+                <p className="font-[family-name:var(--font-dm-mono)] text-[11px] leading-6 text-[#6B6B6B] tracking-wider">{item.desc}</p>
+              </div>
+            </AnimateIn>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FEATURED PRODUCTS ────────────────────────────────── */}
       <section className="py-28 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-14">
@@ -95,7 +115,7 @@ export default async function HomePage() {
                 Featured
               </span>
               <h2 className="font-[family-name:var(--font-bebas)] text-5xl md:text-6xl tracking-widest text-[#F5F3EF]">
-                RA-01: ORIGIN
+                TOP CAMERAS
               </h2>
             </AnimateIn>
             <AnimateIn variant="fade-right">
@@ -134,14 +154,14 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
           <AnimateIn variant="fade-left" duration={800}>
             <h2 className="font-[family-name:var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[#F5F3EF]">
-              FROM HERE,<br />EVERYWHERE.
+              PROTECT WHAT<br />MATTERS MOST.
             </h2>
             <DuneLineAnimate />
           </AnimateIn>
 
           <AnimateIn variant="fade-right" delay={150} duration={800}>
             <p className="font-[family-name:var(--font-dm-mono)] text-xs leading-7 text-[#6B6B6B] tracking-wider">
-              Refined Aspect is not a brand. It is a standard. Worn by men who move with intention and arrive with presence.
+              Refined Aspect delivers modern wireless surveillance systems designed for homes and businesses. No technician needed — our cameras are built for anyone to install in minutes, with professional-grade protection.
             </p>
             <Link
               href="/about"
@@ -206,7 +226,7 @@ export default async function HomePage() {
           aria-hidden
         >
           <span className="font-[family-name:var(--font-bebas)] text-[clamp(6rem,22vw,20rem)] leading-none tracking-widest text-[#F5F3EF] opacity-[0.02] whitespace-nowrap">
-            RA-01
+            SECURE
           </span>
         </div>
 
@@ -215,10 +235,10 @@ export default async function HomePage() {
             Available Now
           </span>
           <h2 className="font-[family-name:var(--font-bebas)] text-[clamp(3rem,10vw,8rem)] leading-none tracking-widest text-[#F5F3EF] mb-8">
-            RA-01: ORIGIN
+            SHOP ALL CAMERAS
           </h2>
           <p className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider mb-10 max-w-sm mx-auto">
-            Three pieces. One collection. The beginning of something considered.
+            Indoor, outdoor, and business-grade wireless surveillance. Delivered to your door.
           </p>
           <Link
             href="/shop"

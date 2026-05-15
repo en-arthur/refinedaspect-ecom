@@ -4,7 +4,7 @@ import AnimateIn from "@/components/AnimateIn";
 
 export const metadata = {
   title: "About — REFINED ASPECT",
-  description: "The story behind REFINED ASPECT. Refined. Considered. Intentional.",
+  description: "The story behind REFINED ASPECT Smart Home Surveillance. Wireless. Intelligent. Easy to Install.",
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <AnimateIn variant="fade-up" duration={900}>
             <h1 className="font-[family-name:var(--font-bebas)] text-[clamp(2.5rem,8vw,7rem)] leading-none tracking-widest text-[#F5F3EF] max-w-4xl">
-              We started somewhere.<br />This is that place.
+              Security shouldn't<br />be complicated.
             </h1>
           </AnimateIn>
           <AnimateIn variant="fade-in" delay={400} duration={1000}>
@@ -36,17 +36,17 @@ export default function AboutPage() {
             </AnimateIn>
             <AnimateIn variant="fade-up" delay={80} duration={700}>
               <p className="font-[family-name:var(--font-dm-sans)] text-sm leading-8 text-[#6B6B6B] font-light mb-6">
-                Refined Aspect was born from a simple belief — that a man's clothing should speak before he does. Clean lines. Intentional form. Premium fabric. Built for the modern African man going somewhere.
+                Refined Aspect was built on a simple belief — that every home and business deserves professional-grade security without the complexity. We source and deliver modern wireless surveillance systems that anyone can install in minutes.
               </p>
             </AnimateIn>
             <AnimateIn variant="fade-up" delay={160} duration={700}>
               <p className="font-[family-name:var(--font-dm-sans)] text-sm leading-8 text-[#6B6B6B] font-light mb-6">
-                RA-01: Origin is the first collection. Three tees. Each one a coordinate. A starting point. The name Origin isn't nostalgic — it's directional. It marks where we begin, so we know where we're going.
+                Our cameras are designed for real life — weatherproof for outdoor use, sharp enough for night vision, and smart enough to connect to your phone instantly. No technician. No complicated wiring. Just protection, on your terms.
               </p>
             </AnimateIn>
             <AnimateIn variant="fade-up" delay={240} duration={700}>
               <p className="font-[family-name:var(--font-dm-sans)] text-sm leading-8 text-[#6B6B6B] font-light">
-                We're building for the man who moves with purpose. Who understands that restraint is a form of confidence. Who dresses not to be seen, but to be ready.
+                We serve homes and businesses across Ghana, delivering surveillance solutions that are reliable, affordable, and built to last.
               </p>
             </AnimateIn>
           </div>
@@ -75,19 +75,19 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-[rgba(245,243,239,0.08)]">
             {[
               {
-                word: "REFINED",
+                word: "WIRELESS",
                 description:
-                  "In a world that moves fast and loud, refinement is a choice. We design for the man who doesn't need to announce himself. Presence over performance.",
+                  "No drilling through walls. No cable runs. Our systems connect over Wi-Fi so you can place cameras exactly where you need them — inside or out.",
               },
               {
-                word: "ASPECT",
+                word: "INTELLIGENT",
                 description:
-                  "Every cut, every graphic, every detail is considered. Form follows function, but function here means feeling right — in the body, in the room, in the moment.",
+                  "Motion detection, night vision, and live mobile alerts. Your cameras work around the clock and notify you the moment something happens.",
               },
               {
-                word: "MODERN",
+                word: "SIMPLE",
                 description:
-                  "Not trend-chasing. Not nostalgic. Modern means built for now — for the global young man who is rooted somewhere and moving everywhere.",
+                  "Unbox, mount, connect. Every camera is designed for self-installation in under 15 minutes. No tools, no technician, no hassle.",
               },
             ].map((pillar, i) => (
               <AnimateIn
@@ -118,10 +118,10 @@ export default function AboutPage() {
               Available Now
             </span>
             <h2 className="font-[family-name:var(--font-bebas)] text-5xl md:text-6xl tracking-widest text-[#F5F3EF]">
-              RA-01: ORIGIN
+              SHOP ALL CAMERAS
             </h2>
             <p className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider mt-3 max-w-xs">
-              Three pieces. The beginning of something considered.
+              Indoor, outdoor, and business-grade wireless surveillance. Delivered to your door.
             </p>
           </AnimateIn>
 
@@ -130,7 +130,7 @@ export default function AboutPage() {
               href="/shop"
               className="btn-sweep-dark inline-flex items-center gap-3 border border-[#F5F3EF] px-10 py-4 text-xs font-[family-name:var(--font-dm-mono)] tracking-[0.2em] uppercase hover:text-[#F5F3EF] transition-colors group whitespace-nowrap"
             >
-              <span className="relative z-10">Shop the Collection</span>
+              <span className="relative z-10">Shop Cameras</span>
               <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </AnimateIn>

@@ -73,7 +73,7 @@ export default function Footer() {
               © 2026 Refined Aspect. All rights reserved.
             </p>
             <p className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-widest uppercase">
-              Refined. Considered. Intentional.
+              Wireless. Intelligent. Easy to Install.
             </p>
           </div>
         </AnimateIn>

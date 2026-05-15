@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import AnimateIn from "@/components/AnimateIn";
 import SkeletonCard from "@/components/SkeletonCard";
 
-const FILTERS = ["All", "Tee", "Coming Soon"];
+const FILTERS = ["All", "Indoor", "Outdoor", "Business", "Coming Soon"];
 
 export default function ShopPage() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -40,7 +40,7 @@ export default function ShopPage() {
             </span>
             <div className="flex items-end justify-between">
               <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl tracking-widest text-[#F5F3EF]">
-                RA-01: ORIGIN
+                ALL CAMERAS
               </h1>
               <span className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider mb-2 tabular-nums">
                 {filtered.length} {filtered.length === 1 ? "ITEM" : "ITEMS"}
@@ -80,7 +80,7 @@ export default function ShopPage() {
                 COMING SOON
               </h2>
               <p className="font-[family-name:var(--font-dm-mono)] text-xs text-[#6B6B6B] tracking-wider max-w-xs">
-                The next drop is being considered. Stay close.
+                New camera models are on the way. Stay close.
               </p>
             </div>
           </AnimateIn>

@@ -39,7 +39,7 @@ export default function Header() {
   const navLinks = [
     { href: "/shop", label: "Shop" },
     { href: "/about", label: "About" },
-    { href: "/shop", label: "RA-01: Origin", accent: true },
+    { href: "/shop", label: "All Cameras", accent: true },
   ];
 
   return (
@@ -167,7 +167,7 @@ export default function Header() {
             { href: "/", label: "Home" },
             { href: "/shop", label: "Shop" },
             { href: "/about", label: "About" },
-            { href: "/shop", label: "RA-01: Origin" },
+            { href: "/shop", label: "All Cameras" },
           ].map(({ href, label }, i) => (
             <Link
               key={label}
@@ -187,7 +187,7 @@ export default function Header() {
         <div className="pb-10 flex flex-col items-center gap-3">
           <div className="w-8 h-[1px] bg-[#C8A96E] opacity-40" />
           <span className="text-[9px] font-[family-name:var(--font-dm-mono)] text-[#6B6B6B] tracking-[0.4em] uppercase">
-            Refined. Considered. Intentional.
+            Wireless. Intelligent. Easy to Install.
           </span>
         </div>
       </div>
